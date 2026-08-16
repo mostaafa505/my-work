@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مصطفى – مُطوّر أنظمة وتطبيقات</title>
+<meta name="description" content="بورتفوليو مصطفى – مطور أنظمة تطبيقات متخصص في بناء الحلول الرقمية المتكاملة.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=El+Messiri:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f2ee;
+  --bg-card: #faf8f5;
+  --bg-card-2: #f0ece6;
+  --surface: #ede9e3;
+  --border: #ddd9d2;
+  --border-light: #e8e4de;
+  --text-primary: #2a2420;
+  --text-secondary: #6b6560;
+  --text-muted: #9c9590;
+  --accent: #c17d3c;
+  --accent-light: #d4955a;
+  --accent-dim: rgba(193,125,60,0.15);
+  --accent-dim2: rgba(193,125,60,0.08);
+  --shadow-lg: 0 20px 50px rgba(42,36,32,0.15);
+  --radius: 16px;
+  --transition: 0.4s cubic-bezier(0.4,0,0.2,1);
+  --font-main: 'El Messiri', sans-serif;
+  --font-decorative: 'Aref Ruqaa', serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { 
+  font-family: var(--font-main); 
+  background: var(--bg); 
+  color: var(--text-primary); 
+  line-height: 1.7; 
+  -webkit-font-smoothing: antialiased; 
+  overflow-x: hidden; 
+}
+
+/* تأثير الإضاءة التفاعلية التي تتبع الماوس */
+.cursor-aura {
+  position: fixed;
+  top: var(--y, 50%);
+  left: var(--x, 50%);
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--accent-dim) 0%, transparent 60%);
+  pointer-events: none;
+  border-radius: 50%;
+  z-index: 0;
+  transition: width 0.3s, height 0.3s;
+}
+
+::selection { background: var(--accent-dim); color: var(--text-primary); }
+.container { max-width: 1160px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); position: relative; z-index: 1; }
+
+/* HERO - متمركز تماماً في الموبايل والديسكتوب */
+.hero { 
+  min-height: 100vh; 
+  min-height: 100svh; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+  text-align: center; 
+  padding-block: 80px; 
+  position: relative; 
+}
+.hero .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
+}
+/* لمسة فخمة للعنوان العلوي بخطين متماثلين */
+.hero-eyebrow { 
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center;
+  gap: 12px; 
+  font-size: 1rem; 
+  font-weight: 700; 
+  letter-spacing: .1em; 
+  text-transform: uppercase; 
+  color: var(--accent); 
+  margin-bottom: 24px; 
+  animation: fadeUpIn .8s .1s both; 
+}
+.hero-eyebrow::before, .hero-eyebrow::after { 
+  content: ''; 
+  display: block; 
+  width: 35px; 
+  height: 1.5px; 
+  background: var(--accent); 
+  opacity: 0.7;
+}
+.hero-name { 
+  font-family: var(--font-decorative); 
+  font-size: clamp(4.5rem, 12vw, 9rem); 
+  font-weight: 700; 
+  line-height: 1.1; 
+  color: var(--text-primary); 
+  margin-bottom: 15px; 
+  text-align: center;
+  animation: fadeUpIn .8s .25s both;
+  text-shadow: 2px 4px 15px rgba(193,125,60,0.15);
+}
+.hero-tagline { 
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem); 
+  font-weight: 500; 
+  color: var(--text-secondary); 
+  max-width: 650px; 
+  line-height: 1.9; 
+  text-align: center;
+  margin: 0 auto;
+  animation: fadeUpIn .8s .4s both; 
+}
+.scroll-hint { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--text-muted); font-size: .85rem; letter-spacing: .1em; text-transform: uppercase; animation: fadeUpIn 1.2s .9s both; }
+.scroll-line { width: 1.5px; height: 50px; background: linear-gradient(to bottom, var(--accent), transparent); animation: scrollPulse 2.5s ease-in-out infinite; }
+@keyframes scrollPulse { 0%, 100% { opacity: .3; transform: scaleY(1); transform-origin: top; } 50% { opacity: 1; transform: scaleY(.6); transform-origin: top; } }
+
+/* PROJECTS */
+.projects { padding-block: 80px 120px; position: relative; z-index: 1; }
+.section-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 64px; gap: 24px; flex-wrap: wrap; }
+.section-label { font-size: .9rem; font-weight: 700; letter-spacing: .1em; color: var(--accent); margin-bottom: 10px; display: block; }
+.section-title { font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 700; line-height: 1.18; }
+.project-count { font-size: .95rem; font-weight: 600; color: var(--text-muted); padding-bottom: 6px; }
+.ornament-divider { display: flex; align-items: center; gap: 16px; margin-bottom: 40px; }
+.ornament-divider::before, .ornament-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.ornament-dot { width: 8px; height: 8px; transform: rotate(45deg); background: var(--accent); box-shadow: 0 0 0 4px var(--accent-dim); }
+
+/* GRID */
+.projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 35px; perspective: 1000px; }
+@media(max-width: 768px) { .projects-grid { grid-template-columns: 1fr; gap: 28px; } }
+
+/* CARD & 3D TILT EFFECT */
+.project-card { 
+  background: var(--bg-card); 
+  border: 1px solid var(--border-light); 
+  border-radius: var(--radius); 
+  overflow: hidden; 
+  cursor: pointer; 
+  display: flex; 
+  flex-direction: column; 
+  opacity: 0; 
+  transform: translateY(30px);
+  transform-style: preserve-3d;
+  transition: opacity 0.6s ease, transform 0.1s ease, box-shadow 0.3s ease;
+}
+.project-card.visible { opacity: 1; transform: translateY(0); }
+.project-card:hover { box-shadow: var(--shadow-lg); border-color: rgba(193,125,60,.35); z-index: 2; }
+
+.card-image-wrap { position: relative; overflow: hidden; aspect-ratio: 16/10; background: var(--surface); flex-shrink: 0; transform: translateZ(20px); }
+.card-image-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform 0.8s cubic-bezier(.4,0,.2,1); display: block; }
+.project-card:hover .card-image-wrap img { transform: scale(1.08); }
+
+.card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(42,36,32,.85) 0%, rgba(42,36,32,0) 60%); opacity: 0; transition: opacity var(--transition); display: flex; align-items: flex-end; padding: 24px; }
+.project-card:hover .card-overlay { opacity: 1; }
+.overlay-cta { display: inline-flex; align-items: center; gap: 10px; font-size: .95rem; font-weight: 700; color: #fff; letter-spacing: .05em; transform: translateY(15px); transition: transform 0.4s ease; }
+.project-card:hover .overlay-cta { transform: translateY(0); }
+.overlay-cta .arrow { width: 32px; height: 32px; border: 1.5px solid rgba(255,255,255,.5); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background var(--transition); flex-shrink: 0; }
+.overlay-cta .arrow svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.5; }
+
+.card-body { padding: 28px; flex: 1; display: flex; flex-direction: column; gap: 14px; transform: translateZ(30px); }
+.card-meta { display: flex; align-items: center; justify-content: space-between; }
+.card-tag { display: inline-block; font-size: .85rem; font-weight: 700; letter-spacing: .05em; color: var(--accent); background: var(--accent-dim2); padding: 6px 14px; border-radius: 100px; border: 1px solid rgba(193,125,60,.2); }
+.card-number { font-family: var(--font-decorative); font-size: 1.3rem; color: var(--accent-light); opacity: 0.5; }
+.card-title { font-size: 1.4rem; font-weight: 700; line-height: 1.4; color: var(--text-primary); }
+.card-desc { font-size: 1.05rem; color: var(--text-secondary); line-height: 1.75; flex: 1; }
+.card-footer { padding: 16px 28px; border-top: 1px solid var(--border-light); display: flex; align-items: center; gap: 10px; transform: translateZ(20px); }
+.tech-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.tech-label { font-size: .9rem; color: var(--text-muted); font-weight: 600; }
+
+/* MODAL */
+.modal-backdrop { position: fixed; inset: 0; background: rgba(42,36,32,.7); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 100; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity .4s ease; }
+.modal-backdrop.active { opacity: 1; pointer-events: all; }
+.modal { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 24px; max-width: 850px; width: 100%; max-height: 90vh; overflow-y: auto; transform: translateY(40px) scale(.95); opacity: 0; transition: all .5s cubic-bezier(.4,0,.2,1); position: relative; scrollbar-width: thin; scrollbar-color: var(--accent-light) transparent; box-shadow: 0 30px 60px rgba(0,0,0,0.2); }
+.modal-backdrop.active .modal { transform: translateY(0) scale(1); opacity: 1; }
+.modal::-webkit-scrollbar { width: 6px; }
+.modal::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+.modal-hero-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; object-position: top; border-radius: 24px 24px 0 0; display: block; cursor: zoom-in; }
+.modal-content { padding: 40px; }
+.modal-tag { display: inline-block; font-size: .85rem; font-weight: 700; color: var(--accent); background: var(--accent-dim2); padding: 6px 16px; border-radius: 100px; border: 1px solid rgba(193,125,60,.2); margin-bottom: 20px; }
+.modal-title { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 700; line-height: 1.35; color: var(--text-primary); margin-bottom: 24px; }
+.modal-desc { font-size: 1.1rem; line-height: 2; color: var(--text-secondary); }
+.modal-section-title { font-size: 1rem; font-weight: 700; color: var(--accent); margin: 36px 0 16px; display: flex; align-items: center; gap: 8px; }
+.modal-section-title::before { content: ''; display: block; width: 12px; height: 2px; background: var(--accent); }
+.features-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+.features-list li { display: flex; gap: 14px; font-size: 1.05rem; color: var(--text-primary); line-height: 1.7; font-weight: 500; }
+.features-list li::before { content: '✦'; color: var(--accent-light); font-size: 1.2rem; flex-shrink: 0; line-height: 1.4; }
+.tech-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+.tech-tag { font-size: .9rem; font-weight: 600; color: var(--text-secondary); background: var(--surface); padding: 8px 18px; border-radius: 100px; border: 1px solid var(--border); transition: 0.3s; }
+.tech-tag:hover { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
+.modal-actions { display: flex; gap: 16px; margin-top: 40px; flex-wrap: wrap; }
+.btn-primary { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-main); font-size: 1rem; font-weight: 700; color: #fff; background: var(--accent); border: none; padding: 15px 32px; border-radius: 100px; cursor: pointer; text-decoration: none; transition: background var(--transition), transform .2s, box-shadow .2s; }
+.btn-primary:hover { background: var(--accent-light); transform: translateY(-3px); box-shadow: 0 10px 20px var(--accent-dim); }
+.btn-secondary { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-main); font-size: 1rem; font-weight: 600; color: var(--text-primary); background: transparent; border: 1.5px solid var(--border); padding: 14px 30px; border-radius: 100px; cursor: pointer; text-decoration: none; transition: all var(--transition); }
+.btn-secondary:hover { border-color: var(--accent); background: var(--accent-dim2); color: var(--accent); }
+.modal-close { position: absolute; top: 20px; left: 20px; width: 45px; height: 45px; border-radius: 50%; background: rgba(0,0,0,.5); backdrop-filter: blur(5px); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .3s; z-index: 10; }
+.modal-close:hover { background: var(--accent); transform: rotate(90deg); }
+.modal-close svg { width: 18px; height: 18px; stroke: #fff; stroke-width: 2.5; fill: none; }
+.modal-screenshots { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 10px; }
+.modal-screenshots img { width: 100%; aspect-ratio: 16/10; object-fit: cover; object-position: top; border-radius: 12px; border: 1px solid var(--border-light); transition: transform .4s, box-shadow .4s; cursor: zoom-in; }
+.modal-screenshots img:hover { transform: scale(1.03); box-shadow: 0 10px 25px rgba(0,0,0,0.1); z-index: 2; position: relative; }
+
+/* LIGHTBOX */
+.lightbox { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; backdrop-filter: blur(10px); }
+.lightbox.active { opacity: 1; pointer-events: all; }
+.lightbox img { max-width: 90%; max-height: 90vh; border-radius: 16px; transform: scale(0.95); transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+.lightbox.active img { transform: scale(1); }
+.lightbox-close { position: absolute; top: 30px; right: 30px; color: rgba(255,255,255,0.7); font-size: 50px; cursor: pointer; background: none; border: none; transition: 0.3s; line-height: 0.5; }
+.lightbox-close:hover { color: #fff; transform: scale(1.1); }
+
+/* FOOTER */
+.site-footer { padding: 50px 0; border-top: 1px solid var(--border-light); }
+.footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+.footer-brand { font-family: var(--font-decorative); font-size: 1.8rem; font-weight: 700; color: var(--accent); }
+.footer-copy { font-size: .95rem; font-weight: 600; color: var(--text-muted); }
+
+/* ANIMATIONS */
+@keyframes fadeUpIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+/* RESPONSIVE */
+@media(max-width: 768px) {
+  .hero { min-height: 100svh; padding-block: 0; }
+  .scroll-hint { display: none; }
+  .section-header { margin-bottom: 40px; }
+  .modal-content { padding: 24px; }
+  .modal-screenshots { grid-template-columns: 1fr; }
+  .cursor-aura { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor-aura"></div>
+
+<section class="hero">
+  <div class="container">
+    <p class="hero-eyebrow">تطوير البرمجيات</p>
+    <h1 class="hero-name">مصطفى</h1>
+    <p class="hero-tagline">مُطوّر أنظمة وتطبيقات — أبني حلولاً رقمية متكاملة، منصات SaaS، ولوحات تحكم بتركيز على الأداء وتجربة المستخدم.</p>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>اكتشف الأنظمة</span>
+  </div>
+</section>
+
+<section class="projects" id="projects">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <p class="section-label">البنية التحتية والمشاريع</p>
+        <h2 class="section-title">أنظمة رقمية مختارة</h2>
+      </div>
+      <span class="project-count">٤ منصات متكاملة</span>
+    </div>
+    <div class="ornament-divider" aria-hidden="true"><div class="ornament-dot"></div></div>
+
+    <div class="projects-grid" id="projectsGrid">
+
+      <!-- المشروع الأول: POS -->
+      <article class="project-card"
+        data-id="pos" 
+        data-tag="نظام متكامل (POS)"
+        data-tech="PHP (OOP) · MySQL · Bootstrap 5 · Vanilla Animations"
+        data-link="https://car.newhosters.com/app"
+        data-title="نظام متكامل لنقاط البيع وإدارة مراكز الصيانة"
+        data-desc="الفكرة من المشروع ده إني مكنتش عايز أعمل مجرد سيستم مبيعات (POS) تقليدي. النظام ده بنيته من الصفر عشان يكون حل شامل لأي نشاط تجاري، وتحديداً محلات الإلكترونيات ومراكز الصيانة. ركزت جداً إنه يدمج بين سرعة البيع اليومي، إدارة المخزون المعقدة، حسابات الموردين، والأهم: إدارة قسم الصيانة بالكامل، وكل ده بواجهة مستخدم (UI/UX) سريعة، مريحة للعين، وبتنجز في الشغل."
+        data-features='["شاشة المبيعات (POS): سريعة وذكية بتدعم البحث الديناميكي وإضافة المنتجات بضغطة واحدة مع فواتير ضريبية ومرتجعات سلسة تسمع في الخزنة والمخزون.","إدارة المخزون وتتبع الأجهزة: نظام (FIFO) لتتبع دفعات البضاعة برقم السيريال (IMEI) وتتبع فترات الضمان والتنبيه بالنواقص.","إدارة قسم الصيانة (دورة حياة كاملة): تسعير ذكي لقطع الغيار المسحوبة ويفصل بين أجرة الفني ونسبة المركز آلياً لضمان الشفافية.","حسابات الموردين: جرد احترافي وإدخال فواتير، كشوفات حساب تفصيلية للمديونيات، وتتبع الدفعات والشيكات بتواريخ استحقاقها.","العملاء والإشعارات: نظام ملفات كامل للعملاء، دعم إشعارات SMS/WhatsApp، ونظام التحقق (OTP) في العمليات الحساسة.","أمان قوي وتصميم عملي: حماية ضد ثغرات SQL Injection و XSS، وسكربتات Auto-Migrations، وتصميم جاهز للطباعة المباشرة (@media print) للفواتير والتقارير."]'
+        data-imgs='["pos/1.png", "pos/map.png", "pos/2.png"]'>
+        <div class="card-image-wrap">
+          <img src="pos/1.png" alt="نظام متكامل لنقاط البيع وإدارة مراكز الصيانة" loading="eager">
+          <div class="card-overlay"><span class="overlay-cta">استكشف النظام <span class="arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">نظام متكامل (POS)</span><span class="card-number">٠١</span></div>
+          <h3 class="card-title">نظام متكامل لنقاط البيع وإدارة مراكز الصيانة</h3>
+          <p class="card-desc">حل شامل لإدارة نشاطك التجاري يدمج المبيعات، المخزون المعقد، حسابات الموردين، وإدارة قسم الصيانة.</p>
+        </div>
+        <div class="card-footer"><div class="tech-dot"></div><span class="tech-label">PHP (OOP) · MySQL · Bootstrap 5</span></div>
+      </article>
+
+      <!-- المشروع الثاني: EnglishPro -->
+      <article class="project-card"
+        data-id="english" 
+        data-tag="EdTech SaaS & AI"
+        data-tech="Vanilla HTML/CSS/JS · AI Engine · PDF.js · SPA"
+        data-link="https://car.newhosters.com/english/"
+        data-title="منصة EnglishPro (EdTech SaaS) – منصة تعليمية تكيّفية بالذكاء الاصطناعي"
+        data-desc="فكرة المشروع مكنتش إني أعمل مجرد موقع بيقدم كورسات أو محتوى ثابت. بنيت EnglishPro عشان يكون منصة تعليمية ذكية (EdTech SaaS) بتعتمد بالكامل على الذكاء الاصطناعي عشان يشتغل كـ «مدرس إنجليزي خاص» للمستخدم متاح 24 ساعة. النظام بيحلل مستوى المستخدم لحظياً وبيبنيله خطط دراسية مخصصة بتدربه على كل مهارات اللغة، في بيئة احترافية مبنية على أحدث معايير تصميم الـ Bento Box."
+        data-features='["المعلم الذكي (AI Tutor): تصحيح نحوي فوري للمحادثات اليومية (كتابية وصوتية) واقتراح عبارات احترافية (Native Expressions).","خطط دراسية تكيّفية (Adaptive AI Plans): تحليل أداء ونقاط ضعف المستخدم لتوليد خطة يومية مخصصة للتحسين السريع.","تحليل النطق (Pronunciation Analysis): الذكاء الاصطناعي يقيم نطق الحروف والطلاقة الصوتية (Accent & Fluency Tracking).","معالجة النصوص (PDF.js): رفع الكتب واستخراج الكلمات الصعبة وشرحها أوتوماتيكياً في السياق مع توليد أمثلة لتسهيل الحفظ.","لوحة تحكم ذكية وأدوات إنتاجية: تتبع أيام الدراسة (Streaks)، مؤقت بومودورو، حلقات الإنجاز البصرية، وبحث فوري (Cmd+K).","تجربة مستخدم عالمية (Premium UI): تصميم Bento Box، تأثيرات Glassmorphism، ثيم ليلي بتصميم يطفو (Floating Architecture)."]'
+        data-imgs='["english pro/1.png", "english pro/map.png", "english pro/2.png", "english pro/3.png", "english pro/4.png", "english pro/5.png"]'>
+        <div class="card-image-wrap">
+          <img src="english pro/1.png" alt="منصة EnglishPro (EdTech SaaS)" loading="lazy">
+          <div class="card-overlay"><span class="overlay-cta">استكشف النظام <span class="arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">EdTech SaaS & AI</span><span class="card-number">٠٢</span></div>
+          <h3 class="card-title">منصة EnglishPro – تعليم تكيّفي بالذكاء الاصطناعي</h3>
+          <p class="card-desc">منصة SaaS تعتمد بالكامل على محرك ذكاء اصطناعي لتعمل كمعلم خاص يبني مسارات تعلم مخصصة.</p>
+        </div>
+        <div class="card-footer"><div class="tech-dot"></div><span class="tech-label">Vanilla JS · AI Engine · PDF.js</span></div>
+      </article>
+
+      <!-- المشروع الثالث: AURA HOME -->
+      <article class="project-card"
+        data-id="aura" 
+        data-tag="E-Commerce SPA"
+        data-tech="Vanilla JS (ES6+) · Tailwind CSS · AOS · LocalStorage"
+        data-link="https://aura-umber-beta.vercel.app/"
+        data-title="منصة AURA HOME – تطبيق ويب للتجارة الإلكترونية الفاخرة"
+        data-desc="الفكرة هنا مكنتش مجرد بناء متجر إلكتروني تقليدي، كان هدفي أبرمج تطبيق ويب متكامل (SPA) يحاكي تجربة المستخدم في المتاجر العالمية الفاخرة ومتاجر الأثاث الراقي. ركزت جداً على تطبيق فلسفة المينيماليزم (Minimalism) والاعتماد على المساحات السلبية في التصميم عشان أدي للمستخدم إحساس بالفخامة والهدوء البصري، مع الاهتمام بالأداء العالي والتفاعلات الدقيقة (Micro-interactions)."
+        data-features='["تجربة مستخدم ديناميكية: هيدر ذكي (Glassmorphism) يتفاعل مع التمرير وقائمة تنقل كاملة الشاشة للهواتف بتأثيرات ناعمة.","أنظمة البحث والفلترة الفورية: فلترة المنتجات لحظياً (Live Filtering) بمجرد الكتابة بدون إعادة تحميل الصفحة، مع شريط تصنيفات ديناميكي.","إدارة السلة وحالة النظام: سلة انزلاقية جانبية (Slide-Out Drawer) تعتمد على LocalStorage لحفظ حالة المنتجات إذا أغلق المستخدم المتصفح.","ميزة النظرة السريعة (Quick View Modal): لعرض تفاصيل المنتج وإضافته للسلة بسرعة بدون مغادرة الصفحة.","محاكاة دورة الدفع والإشعارات: نظام ذكي يحاكي عملية الدفع، يفرغ السلة برمجياً، ويعرض إشعارات (Toast Notifications) لتوفير تغذية راجعة للمستخدم.","تجاوب كامل وهيكلة مرنة: تحسين عرض المنتجات في الموبايل ليدعم التمرير الأفقي (Swipe-friendly) وتجربة تضاهي التطبيقات الأصلية (Native-like)."]'
+        data-imgs='["aura/1.png", "aura/2.png", "aura/3.png", "aura/4.png", "aura/5.png", "aura/6.png"]'>
+        <div class="card-image-wrap">
+          <img src="aura/1.png" alt="منصة AURA HOME" loading="lazy">
+          <div class="card-overlay"><span class="overlay-cta">استكشف النظام <span class="arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">E-Commerce SPA</span><span class="card-number">٠٣</span></div>
+          <h3 class="card-title">منصة AURA HOME – للتجارة الإلكترونية الفاخرة</h3>
+          <p class="card-desc">تطبيق ويب (SPA) يحاكي تجربة المتاجر العالمية الفاخرة بفلسفة المينيماليزم والمساحات السلبية.</p>
+        </div>
+        <div class="card-footer"><div class="tech-dot"></div><span class="tech-label">Vanilla JS · Tailwind CSS · SPA</span></div>
+      </article>
+
+      <!-- المشروع الرابع: APEX CONSTRUCT -->
+      <article class="project-card"
+        data-id="apex" 
+        data-tag="Corporate Website"
+        data-tech="Semantic HTML5 · Vanilla CSS3/JS · FontAwesome"
+        data-link="https://mostaafa505.github.io/apex/"
+        data-title="موقع APEX CONSTRUCT – منصة رقمية لشركة مقاولات فاخرة"
+        data-desc="المشروع ده عبارة عن موقع ويب متكامل ومتعدد الصفحات لشركة Apex Construct، وهي شركة عالمية رائدة في مجال البناء والتشطيبات المعمارية. كان هدفي الأساسي إني أعمل واجهة رقمية فاخرة تعكس تاريخ الشركة الممتد من 2014، وتكون نقطة جذب احترافية للمطورين العقاريين، أصحاب الأعمال، ومديري المرافق حول العالم."
+        data-features='["تصميم متجاوب وواجهة عصرية: يتكيف بسلاسة مع كل الشاشات، مع استخدام متغيرات (CSS Variables) لإدارة الألوان بدقة وخطوط (Manrope & Oswald).","عناصر تفاعلية متقدمة: تأثيرات الظهور التدريجي (Scroll Reveal)، عدادات إحصائية ذكية، وشريط شركاء متحرك بسلاسة (Infinite Carousel).","هيكل تنظيمي ضخم ومتكامل: 8 أقسام رئيسية تشمل سابقة الأعمال، معايير الأيزو، الأسئلة الشائعة، التوظيف، وآراء العملاء.","تسهيل التواصل ودعم التحويل (CTA): أزرار دعوة لاتخاذ إجراء موزعة استراتيجياً وزر واتساب عائم للتواصل الفوري لتسهيل عمليات البيع.","تحسين محركات البحث (SEO): كود نظيف (Semantic HTML5) مع وسوم دقيقة للصور (Alt Tags) ووصف يعزز الأداء وتصدر نتائج البحث.","إحصائيات بارزة للمصداقية: دعم الموقع بإبراز إنجازات الشركة كإتمام أكثر من 350 مشروع، التواجد في 12 دولة، ونسبة رضا 98%."]'
+        data-imgs='["apex/1.png", "apex/2.png", "apex/3.png", "apex/4.png", "apex/5.png", "apex/6.png", "apex/7.png", "apex/8.png"]'>
+        <div class="card-image-wrap">
+          <img src="apex/1.png" alt="موقع APEX CONSTRUCT" loading="lazy">
+          <div class="card-overlay"><span class="overlay-cta">استكشف النظام <span class="arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">Corporate Website</span><span class="card-number">٠٤</span></div>
+          <h3 class="card-title">موقع APEX CONSTRUCT – منصة لشركة مقاولات</h3>
+          <p class="card-desc">واجهة رقمية فاخرة متعددة الصفحات مبنية بالكود الصافي لتعكس تاريخ وهوية الشركة بوضوح.</p>
+        </div>
+        <div class="card-footer"><div class="tech-dot"></div><span class="tech-label">Semantic HTML5 · Vanilla CSS3/JS</span></div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <span class="footer-brand">مصطفى.</span>
+      <span class="footer-copy">مشاريع تُصنع باعتناء</span>
+    </div>
+  </div>
+</footer>
+
+<!-- نافذة المشروع (Modal) -->
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-label="تفاصيل المشروع">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modalClose" aria-label="إغلاق">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <img src="" alt="" class="modal-hero-img" id="modalHeroImg">
+    <div class="modal-content">
+      <span class="modal-tag" id="modalTag"></span>
+      <h2 class="modal-title" id="modalTitle"></h2>
+      <p class="modal-desc" id="modalDesc"></p>
+      <p class="modal-section-title">المواصفات التقنية وأهم المميزات</p>
+      <ul class="features-list" id="modalFeatures"></ul>
+      <p class="modal-section-title">الواجهة الرسومية وخرائط المشروع</p>
+      <div class="modal-screenshots" id="modalScreenshots"></div>
+      <p class="modal-section-title">البنية التكنولوجية (Tech Stack)</p>
+      <div class="tech-tags" id="modalTech"></div>
+      <div class="modal-actions">
+        <a href="#" target="_blank" rel="noopener" class="btn-primary" id="modalLink">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+            <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+          فحص المشروع الحي
+        </a>
+        <button class="btn-secondary" id="modalCloseBtn">رجوع للأنظمة</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// 1. تأثير الـ Interactive Aura خلف الماوس
+const aura = document.querySelector('.cursor-aura');
+document.addEventListener('mousemove', (e) => {
+  if(window.innerWidth > 768) {
+    document.documentElement.style.setProperty('--x', e.clientX + 'px');
+    document.documentElement.style.setProperty('--y', e.clientY + 'px');
+  }
+});
+
+// 2. تأثير الـ 3D Tilt للكروت (Wow Factor)
+const cards = document.querySelectorAll('.project-card');
+cards.forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -5;
+    const rotateY = ((x - centerX) / centerX) * 5;
+    
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px) scale(1.02)`;
+  });
+  
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale(1)';
+  });
+});
+
+// 3. أنيميشن الظهور السلس (Scroll Reveal)
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if(entry.isIntersecting){
+      setTimeout(() => entry.target.classList.add('visible'), i * 100);
+      obs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+cards.forEach(c => obs.observe(c));
+
+// 4. نظام النافذة المنبثقة (Modal)
+const backdrop = document.getElementById('modalBackdrop');
+const modal = document.getElementById('modal');
+const closeBtn = document.getElementById('modalClose');
+const closeBtnB = document.getElementById('modalCloseBtn');
+
+function openModal(card) {
+  const id = card.dataset.id;
+  if(!id) return;
+  const imgs = JSON.parse(card.dataset.imgs || '[]');
+  const features = JSON.parse(card.dataset.features || '[]');
+  const tech = card.dataset.tech || '';
+  const link = card.dataset.link || '#';
+  
+  document.getElementById('modalTag').textContent = card.dataset.tag || '';
+  document.getElementById('modalTitle').textContent = card.dataset.title || '';
+  document.getElementById('modalDesc').textContent = card.dataset.desc || '';
+  
+  const heroImg = document.getElementById('modalHeroImg');
+  if(imgs[0]) {
+    heroImg.src = imgs[0];
+    heroImg.alt = card.dataset.title || '';
+    heroImg.style.display = 'block';
+  } else {
+    heroImg.style.display = 'none';
+  }
+  
+  document.getElementById('modalFeatures').innerHTML = features.map(f => '<li>'+f+'</li>').join('');
+  document.getElementById('modalScreenshots').innerHTML = imgs.slice(1).map(s => '<img src="'+s+'" alt="لقطة المشروع" loading="lazy">').join('');
+  document.getElementById('modalTech').innerHTML = tech.split('·').map(t => '<span class="tech-tag">'+t.trim()+'</span>').join('');
+  
+  const linkEl = document.getElementById('modalLink');
+  if(link && link !== '#') {
+    linkEl.href = link;
+    linkEl.style.display = 'inline-flex';
+  } else {
+    linkEl.style.display = 'none';
+  }
+  
+  backdrop.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  modal.scrollTop = 0;
+}
+
+function closeModal() {
+  backdrop.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('projectsGrid').addEventListener('click', e => {
+  const card = e.target.closest('.project-card');
+  if(card) openModal(card);
+});
+closeBtn.addEventListener('click', closeModal);
+closeBtnB.addEventListener('click', closeModal);
+backdrop.addEventListener('click', e => { if(e.target === backdrop) closeModal(); });
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+
+// تأثير Parallax بسيط للاسم
+const heroName = document.querySelector('.hero-name');
+if(heroName) {
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if(y < 500) {
+      heroName.style.transform = 'translateY(' + (y * 0.15) + 'px)';
+      heroName.style.opacity = Math.max(0, 1 - y * 0.002);
+    }
+  }, { passive: true });
+}
+
+// 5. نظام التكبير (Lightbox)
+const lightbox = document.createElement('div');
+lightbox.className = 'lightbox';
+lightbox.innerHTML = '<button class="lightbox-close" aria-label="إغلاق">&times;</button><img src="" alt="Full View">';
+document.body.appendChild(lightbox);
+const lbImg = lightbox.querySelector('img');
+
+function openLightbox(src) {
+  lbImg.src = src;
+  lightbox.classList.add('active');
+}
+
+document.getElementById('modalScreenshots').addEventListener('click', e => {
+  if (e.target.tagName === 'IMG') openLightbox(e.target.src);
+});
+document.getElementById('modalHeroImg').addEventListener('click', e => {
+  if (e.target.src && e.target.style.display !== 'none') openLightbox(e.target.src);
+});
+lightbox.addEventListener('click', e => {
+  if (e.target !== lbImg) {
+    lightbox.classList.remove('active');
+    setTimeout(() => lbImg.src = '', 400);
+  }
+});
+</script>
+</body>
+</html>
