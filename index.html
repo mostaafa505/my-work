@@ -59,7 +59,7 @@ body {
 ::selection { background: var(--accent-dim); color: var(--text-primary); }
 .container { max-width: 1160px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); position: relative; z-index: 1; }
 
-/* HERO - تمت إضافة خلفية الديسكتوب هنا */
+/* HERO - تمت إضافة خلفية الديسكتوب هنا بصيغة webp */
 .hero { 
   min-height: 100vh; 
   min-height: 100svh; 
@@ -71,7 +71,7 @@ body {
   padding-block: 80px; 
   position: relative; 
   /* إعدادات صورة الديسكتوب */
-  background-image: url('desktop.jpeg');
+  background-image: url('desktop.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -82,7 +82,7 @@ body {
   align-items: center; 
   justify-content: center;
 }
-
+/* لمسة فخمة للعنوان العلوي بخطين متماثلين */
 .hero-eyebrow { 
   display: inline-flex; 
   align-items: center; 
@@ -258,8 +258,8 @@ body {
   .hero { 
     min-height: 100svh; 
     padding-block: 0; 
-    /* تبديل الصورة للموبايل */
-    background-image: url('mobile.jpeg');
+    /* تبديل الصورة للموبايل بصيغة webp */
+    background-image: url('mobile.webp');
   }
   .section-header { margin-bottom: 40px; }
   .modal-content { padding: 24px; }
@@ -278,7 +278,6 @@ body {
     <h1 class="hero-name">مصطفى</h1>
     <p class="hero-tagline">مُطوّر أنظمة وتطبيقات — أبني حلولاً رقمية متكاملة، منصات SaaS، ولوحات تحكم بتركيز على الأداء وتجربة المستخدم.</p>
     
-    <!-- الزر الجديد -->
     <a href="#projects" class="btn-hero">استكشف المشاريع</a>
   </div>
 </section>
