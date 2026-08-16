@@ -59,7 +59,7 @@ body {
 ::selection { background: var(--accent-dim); color: var(--text-primary); }
 .container { max-width: 1160px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); position: relative; z-index: 1; }
 
-/* HERO - متمركز تماماً في الموبايل والديسكتوب */
+/* HERO */
 .hero { 
   min-height: 100vh; 
   min-height: 100svh; 
@@ -77,7 +77,7 @@ body {
   align-items: center; 
   justify-content: center;
 }
-/* لمسة فخمة للعنوان العلوي بخطين متماثلين */
+
 .hero-eyebrow { 
   display: inline-flex; 
   align-items: center; 
@@ -120,9 +120,32 @@ body {
   margin: 0 auto;
   animation: fadeUpIn .8s .4s both; 
 }
-.scroll-hint { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--text-muted); font-size: .85rem; letter-spacing: .1em; text-transform: uppercase; animation: fadeUpIn 1.2s .9s both; }
-.scroll-line { width: 1.5px; height: 50px; background: linear-gradient(to bottom, var(--accent), transparent); animation: scrollPulse 2.5s ease-in-out infinite; }
-@keyframes scrollPulse { 0%, 100% { opacity: .3; transform: scaleY(1); transform-origin: top; } 50% { opacity: 1; transform: scaleY(.6); transform-origin: top; } }
+
+/* زر استكشف المشاريع في القسم العلوي */
+.btn-hero {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-main);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  padding: 15px 40px;
+  border-radius: 100px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--transition);
+  box-shadow: 0 10px 25px rgba(193, 125, 60, 0.25);
+  margin-top: 40px;
+  animation: fadeUpIn .8s .55s both;
+}
+.btn-hero:hover {
+  background: var(--accent-light);
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(193, 125, 60, 0.4);
+}
 
 /* PROJECTS */
 .projects { padding-block: 80px 120px; position: relative; z-index: 1; }
@@ -228,7 +251,6 @@ body {
 /* RESPONSIVE */
 @media(max-width: 768px) {
   .hero { min-height: 100svh; padding-block: 0; }
-  .scroll-hint { display: none; }
   .section-header { margin-bottom: 40px; }
   .modal-content { padding: 24px; }
   .modal-screenshots { grid-template-columns: 1fr; }
@@ -245,10 +267,9 @@ body {
     <p class="hero-eyebrow">تطوير البرمجيات</p>
     <h1 class="hero-name">مصطفى</h1>
     <p class="hero-tagline">مُطوّر أنظمة وتطبيقات — أبني حلولاً رقمية متكاملة، منصات SaaS، ولوحات تحكم بتركيز على الأداء وتجربة المستخدم.</p>
-  </div>
-  <div class="scroll-hint">
-    <div class="scroll-line"></div>
-    <span>اكتشف الأنظمة</span>
+    
+    <!-- الزر الجديد -->
+    <a href="#projects" class="btn-hero">استكشف المشاريع</a>
   </div>
 </section>
 
