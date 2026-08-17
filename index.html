@@ -34,11 +34,29 @@
 html { scroll-behavior: smooth; font-size: 16px; }
 body { 
   font-family: var(--font-main); 
-  background: var(--bg); 
+  /* تم إزالة لون الخلفية من الـ body عشان الطبقة الثابتة تظهر */
   color: var(--text-primary); 
   line-height: 1.7; 
   -webkit-font-smoothing: antialiased; 
   overflow-x: hidden; 
+}
+
+/* =========================================
+   طبقة الخلفية الثابتة للموقع بالكامل
+   ========================================= */
+.site-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -10; /* عشان تفضل ورا كل حاجة في الموقع */
+  background-image: url('desktop-bg.webp'); /* صورة الديسكتوب */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* إضافة تأثير ناعم للتبديل بين الموبايل والديسكتوب */
+  transition: background-image 0.5s ease; 
 }
 
 /* تأثير الإضاءة التفاعلية التي تتبع الماوس */
@@ -59,7 +77,7 @@ body {
 ::selection { background: var(--accent-dim); color: var(--text-primary); }
 .container { max-width: 1160px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); position: relative; z-index: 1; }
 
-/* HERO - تمت إضافة خلفية الديسكتوب هنا بصيغة webp */
+/* HERO */
 .hero { 
   min-height: 100vh; 
   min-height: 100svh; 
@@ -70,11 +88,7 @@ body {
   text-align: center; 
   padding-block: 80px; 
   position: relative; 
-  /* إعدادات صورة الديسكتوب */
-  background-image: url('desktop.webp');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  /* تم إزالة الخلفية من هنا ونقلها للـ .site-bg لتشمل الموقع بالكامل */
 }
 .hero .container {
   display: flex;
@@ -82,7 +96,6 @@ body {
   align-items: center; 
   justify-content: center;
 }
-/* لمسة فخمة للعنوان العلوي بخطين متماثلين */
 .hero-eyebrow { 
   display: inline-flex; 
   align-items: center; 
@@ -255,12 +268,13 @@ body {
 
 /* RESPONSIVE */
 @media(max-width: 768px) {
-  .hero { 
-    min-height: 100svh; 
-    padding-block: 0; 
-    /* تبديل الصورة للموبايل بصيغة webp */
-    background-image: url('mobile.webp');
+  .hero { min-height: 100svh; padding-block: 0; }
+  
+  /* تبديل الصورة للموبايل في الطبقة الثابتة */
+  .site-bg {
+    background-image: url('mobile-bg.webp');
   }
+
   .section-header { margin-bottom: 40px; }
   .modal-content { padding: 24px; }
   .modal-screenshots { grid-template-columns: 1fr; }
@@ -269,6 +283,9 @@ body {
 </style>
 </head>
 <body>
+
+<!-- الطبقة الثابتة للخلفية -->
+<div class="site-bg"></div>
 
 <div class="cursor-aura"></div>
 
